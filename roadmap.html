@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vibrant Life Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF61D2 0%, #FE9090 100%);
+            color: #333;
+        }
+
+        .hero {
+            background: url('https://source.unsplash.com/random/1600x900/?colorful,technology') no-repeat center center/cover;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .nav-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .nav-button:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #FF61D2;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-card {
+            padding: 20px;
+            position: relative;
+            background-color: inherit;
+            width: 45%;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .timeline-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .timeline-card:hover .timeline-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .timeline-card-front, .timeline-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .timeline-card-front {
+            background: linear-gradient(135deg, #FFA07A, #FF69B4);
+            color: white;
+        }
+
+        .timeline-card-back {
+            background: linear-gradient(135deg, #FF69B4, #FFA07A);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: #FF61D2;
+            border: 4px solid #FFF;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 55%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #FF61D2;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #FF61D2;
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #FF61D2;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #FF61D2 transparent transparent;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline-card {
+                width: 100%;
+            }
+            .timeline::after {
+                left: 31px;
+            }
+            .left::before, .right::before {
+                left: 20px;
+            }
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-purple-600 p-4 fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-semibold">My Vibrant Life Roadmap</div>
+            <div class="space-x-4">
+                <a href="#hero" class="nav-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="#about" class="nav-button bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                    <i class="fas fa-info-circle mr-2"></i>About
+                </a>
+                <a href="#roadmap" class="nav-button bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                    <i class="fas fa-map mr-2"></i>Roadmap
+                </a>
+                <a href="#contact" class="nav-button bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                    <i class="fas fa-envelope mr-2"></i>Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to My Vibrant Life Roadmap</h1>
+            <p>A Colorful Journey from Now to the Next 20 Years</p>
+            <button onclick="document.getElementById('roadmap').scrollIntoView({behavior: 'smooth'})" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full text-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                Explore the Roadmap
+            </button>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-8 text-center text-white">About This Roadmap</h2>
+            <p class="text-xl max-w-3xl mx-auto text-center text-white">This
+
+ roadmap represents my aspirations and goals for the next two decades, with vibrant colors symbolizing different milestones and achievements. It is a living document that will evolve as my life journey progresses.</p>
+        </div>
+    </section>
+
+    <section id="roadmap" class="timeline py-20 bg-gray-100">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">My Roadmap</h2>
+            <div class="left">
+                <div class="timeline-card">
+                    <div class="timeline-card-inner">
+                        <div class="timeline-card-front">
+                            <h3 class="text-2xl font-bold mb-4">2024</h3>
+                            <p>Starting my journey with an online store and expanding my skillset.</p>
+                        </div>
+                        <div class="timeline-card-back">
+                            <h3 class="text-2xl font-bold mb-4">Future Vision</h3>
+                            <p>Looking forward to a dynamic career, new challenges, and personal growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="timeline-card">
+                    <div class="timeline-card-inner">
+                        <div class="timeline-card-front">
+                            <h3 class="text-2xl font-bold mb-4">2025</h3>
+                            <p>Launching new projects and focusing on expanding my tech skills.</p>
+                        </div>
+                        <div class="timeline-card-back">
+                            <h3 class="text-2xl font-bold mb-4">Future Vision</h3>
+                            <p>Continuing to grow professionally and personally with exciting new ventures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- timeline cards will go here -->
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-8 text-center">Contact Me</h2>
+            <form class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <div class="mb-4">
+                    <label for="name" class="block text-xl font-semibold mb-2">Name</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500" placeholder="Your Name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-xl font-semibold mb-2">Email</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500" placeholder="Your Email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-xl font-semibold mb-2">Message</label>
+                    <textarea id="message" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full text-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">Send Message</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
